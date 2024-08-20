@@ -1,0 +1,36 @@
+
+{% extends 'inicio/layout.html' %}
+
+
+{% load static %}
+
+{% block titulo %}Recorridos Próximos{% endblock %}
+
+{% block contenido %}
+    <div class="container my-4">
+        <h2 class="mb-4">Recorridos Próximos</h2>
+        <div class="row">
+            {% for ruta in rutas_proximas %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if ruta.imagen %}
+                            <img src="{{ ruta.imagen.url }}" alt="{{ ruta.nombre }}" class="card-img-top ruta-imagen">
+                        {% else %}
+                            <img src="{% static 'images/default_image.jpg' %}" alt="{{ ruta.nombre }}" class="card-img-top ruta-imagen">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ ruta.nombre }}</h5>
+                            <p class="card-text">
+                                <strong>Descripción:</strong> {{ ruta.descripcion|truncatewords:20 }}<br>
+                                <strong>Duración:</strong> {{ ruta.duracion }} Horas<br>
+                                <strong>Fecha:</strong> {{ ruta.fecha }}
+                            </p>
+                            <a href="{% url 'Detalles' ruta_id=ruta.id %}" class="btn btn-primary">Ver Detalles</a>
+                            <a href="{% url 'marcar_ruta_realizada' ruta_id=ruta.id %}" class="btn btn-success">Marcar Como Realizada</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

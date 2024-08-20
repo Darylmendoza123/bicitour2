@@ -1,0 +1,39 @@
+{% extends 'inicio/layout.html' %}
+
+{% block titulo %}Recomendaciones Personalizadas{% endblock %}
+
+{% block contenido %}
+    <h1>Recomendaciones Personalizadas</h1>
+
+    <form method="GET" action="{% url 'Personalizados' %}">
+        <input type="text" name="ciudad" placeholder="Ciudad" value="{{ request.GET.ciudad }}" />
+        <input type="text" name="estado" placeholder="Estado" value="{{ request.GET.estado }}" />
+        <input type="text" name="duracion" placeholder="Duración (en horas)" value="{{ request.GET.duracion }}" />
+        <input type="text" name="distancia" placeholder="Distancia (en km)" value="{{ request.GET.distancia }}" />
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h2>Resultados de la búsqueda</h2>
+    {% if recomendaciones %}
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+            {% for ruta in recomendaciones %}
+                <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; width: 300px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column;">
+                    <div style="height: 180px; overflow: hidden; margin-bottom: 1rem;">
+                        <img src="{{ ruta.imagen.url }}" alt="{{ ruta.nombre }}" style="width: 100%; height: auto; object-fit: cover;" />
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <h3>{{ ruta.nombre }}</h3>
+                        <p><strong>Descripción:</strong> {{ ruta.descripcion }}</p>
+                        <p><strong>Distancia:</strong> {{ ruta.distancia }} km</p>
+                        <p><strong>Duración:</strong> {{ ruta.duracion }} hrs</p>
+                        <p><strong>Ciudad:</strong> {{ ruta.ciudad }}</p>
+                        <p><strong>Estado:</strong> {{ ruta.estado }}</p>
+                        <a href="{% url 'Detalles' ruta.id %}" style="display: inline-block; padding: 0.5rem 1rem; font-size: 1rem; font-weight: bold; color: #fff; background-color: #007bff; border: none; border-radius: 4px; text-align: center; text-decoration: none; transition: background-color 0.2s ease;">Ver Detalles</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No se encontró resultado con los filtros proporcionados.</p>
+    {% endif %}
+{% endblock %}

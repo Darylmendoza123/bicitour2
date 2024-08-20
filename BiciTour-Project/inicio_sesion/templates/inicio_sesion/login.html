@@ -1,0 +1,38 @@
+{% extends "inicio/layout.html" %}
+
+
+{%block titulo%}Login {%endblock%}
+
+{%block contenido%}
+
+<h3 class="text-center">Iniciar Sesion en <br>
+    BiciTour</h3>
+    <div class="text-center">
+        <p>¿todavia no eres miembro?</p>
+        <a href="{% url 'Registrar' %}" class="text-decoration-none">Registrate aqui</a>
+    </div>
+
+
+<div class="form-container">
+    <div class="card">
+        <form class="form-horizontal" action="#" method="POST" role="form">
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico:</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña:</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+            <div class="d-grid">
+                <input type="submit" value="Iniciar Sesión" class="btn btn-primary mb-3">
+            </div>
+            <div class="text-center">
+                <a href="{% url 'Nueva Contraseña' %}" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

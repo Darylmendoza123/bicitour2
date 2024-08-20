@@ -1,0 +1,36 @@
+{% extends "inicio/layout.html" %}
+
+
+{%block titulo%}Principal {%endblock%}
+
+{% block contenido %}
+{% load static %}
+
+<div class="container my-4">
+    <h2 class="mb-4">Recomendados</h2>
+    <div class="row">
+
+        {% for ruta in rutas_proximas %}
+        <div class="row">
+            <div class="card h-100 d-flex flex-row align-items-center">
+                {% if ruta.imagen %}
+                    <img src="{{ ruta.imagen.url }}" alt="{{ ruta.nombre }}" class="img-fluid ruta-imagen" style="width: 250px; height: auto; object-fit: cover; margin-right: 20px;">
+                {% else %}
+                    <img src="{% static 'images/default_image.jpg' %}" alt="{{ ruta.nombre }}" class="img-fluid ruta-imagen" style="width: 250px; height: auto; object-fit: cover; margin-right: 20px;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ ruta.nombre }}</h5>
+                    <p class="card-text">
+                        <strong>Descripción:</strong> {{ ruta.descripcion|truncatewords:20 }}<br>
+                        <strong>Duración:</strong> {{ ruta.duracion }} Horas<br>
+                        <strong>Fecha:</strong> {{ ruta.fecha }}
+                    </p>
+                    <a href="{% url 'Detalles' ruta_id=ruta.id %}" class="btn btn-primary">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

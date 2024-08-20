@@ -1,0 +1,12 @@
+# views.py
+from django.shortcuts import redirect, get_object_or_404
+from .models import Ruta, RutaRealizada
+
+def marcar_ruta_realizada(request, ruta_id):
+    ruta = get_object_or_404(Ruta, id=ruta_id)
+    
+    # Crear un nuevo registro de RutaRealizada sin verificar si el usuario está autenticado
+    RutaRealizada.objects.create(usuario=request.user, ruta=ruta)  # request.user solo funcionará si el usuario está autenticado
+    
+    # Redirige al usuario a la página de recorridos realizados después de marcar la ruta
+    return redirect('Recorridos Realizados')

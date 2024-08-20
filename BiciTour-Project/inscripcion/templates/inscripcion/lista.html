@@ -1,0 +1,47 @@
+{% extends "inicio/layout.html" %}
+
+{% block titulo %} Lista {% endblock %}
+{% block Nombre %} Lista {% endblock %}
+{% block imagen %}
+    {% load static %}
+    <img src="{% static 'inicio/images/home.png' %}" alt="Imagen de encabezado">
+{% endblock %}
+
+{% block encabezado %}
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Lista de participantes</h3>
+        </div>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <h2>Lista de participantes para la Ruta {{ ruta_id }}</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participante in participantes %}
+                <tr>
+                    <td class="muted">{{ participante.nombre }}</td>
+                    <td class="text-semibold">{{ participante.correo }}</td>
+                    <td class="muted">{{ participante.telefono }}</td>
+                    <td class="muted">{{ participante.ciudad }}</td>
+                    <td class="muted">{{ participante.estado }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay participantes registrados para esta ruta.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

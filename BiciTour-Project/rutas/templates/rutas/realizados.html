@@ -1,0 +1,38 @@
+{% extends 'inicio/layout.html' %}
+
+{% load static %}
+
+{% block titulo %}Recorridos Realizados{% endblock %}
+
+{% block contenido %}
+    <div class="container my-4">
+        <h2 class="mb-4">Recorridos Realizados</h2>
+        <div class="row">
+           
+            {% for ruta_realizada in rutas_realizadas %}
+            
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if ruta_realizada.ruta.imagen %}
+                            <img src="{{ ruta_realizada.ruta.imagen.url }}" alt="{{ ruta_realizada.ruta.nombre }}" class="card-img-top ruta-imagen">
+                        {% else %}
+                            <img src="{% static 'images/default_image.jpg' %}" alt="{{ ruta_realizada.ruta.nombre }}" class="card-img-top ruta-imagen">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ ruta_realizada.ruta.nombre }}</h5>
+                            <p class="card-text">
+                                <strong>Descripción:</strong> {{ ruta_realizada.ruta.descripcion|truncatewords:20 }}<br>
+                                <strong>Duración:</strong> {{ ruta_realizada.ruta.duracion }}<br>
+                                <strong>Fecha:</strong> 03/Julio/2024 <br>
+                                <strong>Estatus:</strong> Finalizado<br>
+                                <strong>Precio:</strong> 250$
+                            </p>
+                            <a href="{% url 'Detalles' ruta_id=ruta_realizada.id %}" class="btn btn-primary">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+               
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
