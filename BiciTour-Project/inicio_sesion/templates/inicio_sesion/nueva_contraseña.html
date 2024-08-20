@@ -1,0 +1,32 @@
+{% extends "inicio/layout.html" %}
+
+
+{%block titulo%}Recuperar Contraseña {%endblock%}
+
+{%block contenido%}
+
+<h3 class="text-center">Ingrese nueva <br>
+    contraseña</h3>
+    <div class="text-center">
+      
+<div class="form-container">
+    <div class="card">
+        <form class="form-horizontal" action="#" method="POST" role="form">
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico:</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Nueva Contraseña:</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+
+            <div class="d-grid">
+                <input type="submit" value="Recuperar Contraseña" class="btn btn-primary mb-3">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

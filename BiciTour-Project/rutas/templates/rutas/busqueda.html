@@ -1,0 +1,20 @@
+
+{% extends "inicio/layout.html" %}
+
+{% block titulo %}Resultados de Búsqueda{% endblock %}
+
+{% block contenido %}
+<div class="form-container">
+    <div class="card">
+        <h3>Resultados de Búsqueda para "{{ query }}"</h3>
+        <h4>Rutas</h4>
+        <ul>
+            {% for ruta in rutas %}
+                <li><a href="{% url 'Detalles' ruta.id %}">{{ ruta.nombre }}</a></li>
+            {% empty %}
+                <li>No se encontraron rutas.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
